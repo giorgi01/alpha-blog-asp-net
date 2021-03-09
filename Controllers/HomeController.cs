@@ -7,16 +7,17 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Alpha_blog.Data.Repository;
 
 namespace Alpha_blog.Controllers
 {
     public class HomeController : Controller
     {
-        readonly AppDbContext _context;
+        readonly IRepository _repo;
         
-        public HomeController(AppDbContext context)
+        public HomeController(IRepository repo)
         {
-            _context = context;
+            _repo = repo;
         }
 
         public IActionResult Index()
@@ -37,8 +38,8 @@ namespace Alpha_blog.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(Post post)
         {
-            _context.Posts.Add(post);
-            await _context.SaveChangesAsync();
+            _repo.AddPost(post);
+            await _repo.SaveChangesAsync();
             return RedirectToAction("Index");
         }
     }

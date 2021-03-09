@@ -1,4 +1,5 @@
 using Alpha_blog.Data;
+using Alpha_blog.Data.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,6 +29,9 @@ namespace Alpha_blog
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration["DefaultConnection"]));
+
+            services.AddTransient<IRepository, Repository>();
+
             services.AddMvc();
         }
 
