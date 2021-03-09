@@ -1,4 +1,5 @@
 ﻿using Alpha_blog.Models;
+using Alpha_blog.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -11,6 +12,13 @@ namespace Alpha_blog.Controllers
 {
     public class HomeController : Controller
     {
+        readonly AppDbContext _context;
+        
+        public HomeController(AppDbContext context)
+        {
+            _context = context;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -27,8 +35,10 @@ namespace Alpha_blog.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(Post post)
+        public async Task<IActionResult> Edit(Post post)
         {
+            _context.Posts.Add(post);
+            await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
     }
