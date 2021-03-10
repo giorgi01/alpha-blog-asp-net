@@ -1,19 +1,47 @@
 ﻿@model IEnumerable<Post>
 
-@{ 
+@{
 
 }
 
-<div>
-    <ul>
-        @foreach(var post in Model)
+
+<div class="container" id="zond">
+    <div class="row">
+        @foreach (var post in Model)
         {
-            <li>
-                @post.Title -
-                <a asp-controller="Home" asp-action="Post" asp-route-id="@post.Id">
-                    Show
-                </a>
-            </li>
+            <div class="col-md-4">
+                <div class="single-blog-item">
+                    <div class="blog-thumnail">
+                        <a href=""><img src="http://via.placeholder.com/370x275" alt="blog-img"></a>
+                    </div>
+                    <div class="blog-content">
+                        <h4>
+                            @post.Title
+                        </h4>
+                        <p>@post.Body</p>
+                        <a asp-controller="Home" asp-action="Post" asp-route-id="@post.Id">
+                            View More
+                        </a>
+                    </div>
+                    <span class="blog-date">Created at: @post.Created</span>
+                </div>
+            </div>
         }
-    </ul>
+
+
+
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <footer class="footer">
+            <small>
+
+                Copyright © <a href="enter in a link here">Alpha Blog Web App</a>
+
+                by <a href="enter in a link here">Giorgi Tamarashvili</a>
+
+            </small>
+        </footer>
+    </div>
 </div>
