@@ -30,7 +30,7 @@ namespace Alpha_blog
         {
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration["DefaultConnection"]));
 
-            services.AddDefaultIdentity<IdentityUser>(options =>
+            services.AddIdentity<IdentityUser, IdentityRole>(options =>
             {
                 options.Password.RequiredLength = 8;
                 options.Password.RequireDigit = false;
@@ -38,9 +38,13 @@ namespace Alpha_blog
                 options.Password.RequireNonAlphanumeric = false;
 
                 options.SignIn.RequireConfirmedEmail = false;
-            })
-                .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<AppDbContext>();
+
+            }).AddEntityFrameworkStores<AppDbContext>();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Auth/Login";
+            });
 
             services.AddTransient<IRepository, Repository>();
 
@@ -66,6 +70,7 @@ namespace Alpha_blog
             app.UseRouting();
 
             app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
