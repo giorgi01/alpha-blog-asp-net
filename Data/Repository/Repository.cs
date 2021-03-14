@@ -42,11 +42,7 @@ namespace Alpha_blog.Data.Repository
 
         public async Task<bool> SaveChangesAsync()
         {
-            if(await _context.SaveChangesAsync() > 0)
-            {
-                return true;
-            }
-            return false;
+            return await _context.SaveChangesAsync() > 0;
         }
 
     }

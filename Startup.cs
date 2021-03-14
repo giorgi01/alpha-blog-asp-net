@@ -1,4 +1,5 @@
 using Alpha_blog.Data;
+using Alpha_blog.Data.FileManager;
 using Alpha_blog.Data.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -47,6 +48,7 @@ namespace Alpha_blog
             });
 
             services.AddTransient<IRepository, Repository>();
+            services.AddTransient<IFileManager, FileManager>();
 
             services.AddMvc();
         }

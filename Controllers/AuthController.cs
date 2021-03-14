@@ -10,7 +10,7 @@ namespace Alpha_blog.Controllers
 {
     public class AuthController : Controller
     {
-        private SignInManager<IdentityUser> _signInManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
 
         public AuthController(SignInManager<IdentityUser> signInManager)
         {
